@@ -1,0 +1,581 @@
+scriptencoding utf-8
+"Basic set up
+set textwidth=80
+set expandtab
+set tabstop=4
+set softtabstop=4
+set autoindent
+set shiftwidth=4
+set number relativenumber
+set hlsearch
+set laststatus=2
+set showmode
+set smartindent
+set wrap
+set statusline=%f
+set linebreak
+set wrapmargin=0
+set cmdheight=2
+set encoding=utf-8
+set fileencoding=uft-8
+set termencoding=utf-8
+set guifont=Courier_New:h24
+set linespace=3
+set tags=./tags,tags;$HOME
+
+
+
+
+"Vundle configure
+"
+" let mapleader = "\<space>"
+"Save selection to register 8
+" nnoremap <Leader>\ gg=G
+nnoremap <Leader>ww :Gwrite<cr>
+nnoremap <Leader>cc :Git commit<cr>
+" nnoremap <Leader>= :GWrite<cr> Gcommit<cr>
+" nnoremap <Leader>ff :Files<cr>
+
+
+
+"set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+
+"Another plug management
+call plug#begin('~/.vim/plugged')
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'neoclide/coc.nvim', {'branch':'release'}
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'rafi/awesome-vim-colorschemes', {'branch':'master'}
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'SirVer/ultisnips',
+Plug 'honza/vim-snippets'
+
+"Markdonw plugin
+Plug 'godlygeek/tabular' | Plug 'tpope/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+
+" Dim paragraphs above and below the active paragraph.
+Plug 'junegunn/limelight.vim'
+
+" Distraction free writing by removing UI elements and centering everything.
+Plug 'junegunn/goyo.vim'
+
+"Plug 'pangloss/vim-javascript'
+Plug 'dense-analysis/ale'
+Plug 'Shougo/unite.vim'
+Plug 'uiiaoo/java-syntax.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'luochen1990/rainbow'
+" Plug 'ludovicchabant/vim-gutentags'
+
+
+Plug 'tyru/open-browser.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'liuchengxu/vista.vim'
+
+
+" System copy
+Plug 'christoomey/vim-system-copy'
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'kadekillary/subtle_solo'
+
+"Tpope plugins
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-ragtag'
+Plug 'airblade/vim-gitgutter'
+
+" Google formatter
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+" Also add Glaive, which is used to configure codefmt's maktaba flags. See
+" `:help :Glaive` for usage.
+Plug 'google/vim-glaive'
+Plug 'sheerun/vim-polyglot'
+
+Plug 'chun-yang/auto-pairs'
+
+call plug#end()
+"End of another plug management
+"
+"
+"Set color solarize
+syntax enable
+set background=light
+let g:solarized_termcolors=256
+" colorscheme solarized8
+colorscheme atom
+
+"colorscheme sonokai 
+let g:solarized_visibility="high"
+"colorscheme subtle_dark
+"End of color solarized
+"
+"vim diff config
+"
+highlight DiffAdd gui=none guibg=#bddd22
+highlight DiffDelete gui=none guibg=#ffb3a7
+highlight DiffChagne gui=Bold guifg=#f00056 guibg=#f00056
+highlight DiffText gui=none guibg=#70f3ff
+
+"end of vim diff config
+"
+"
+"
+
+"UltiSnippet
+"
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"
+let g:UltiSnipsUsePythonVersion = 3
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+let g:UltiSnipsListSnippets="<C-l>"
+"let g:UltiSnipsSnippetDirectories=["UltiSnips", "user_snippets"]
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical""
+"Edit your snippet
+nnoremap <leader>es :UltiSnipsEdit<cr>
+
+"End of UltiSnippet
+"
+"
+"
+"pathogen runtime path management
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+filetype plugin on
+
+"end of pathgen
+
+
+
+"Pep8
+"
+let g:pep8_map='<leader>8'
+
+
+"Syntastic
+"set statusline+=%#waringmsg#
+"set statusline+=%{SynstasticStatuslineFlag()}
+"set statusline+=%*
+
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_list=1
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=0
+
+"Project, Tab and Tag god view setting
+
+"Map F1 to NERDTreeToggle
+map <F2> :NERDTreeToggle<CR>
+map <C-d> :NERDTreeToggle<CR>
+
+" Map F2 to MBEToggle
+"nmap <F3> :MBEToggle<CR>
+
+"Map F3 to TagBarToggle
+"nmap <F4> :TagbarToggle<CR>
+
+"Switch between windows
+map <c-h> <c-w>h
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+
+"Switch between tabs"
+nnoremap tp :tabprevious<CR>
+nnoremap tn :tabnext<CR>
+"inoremap tp <esc>:tabprevious<CR>i
+"inoremap tn <esc>:tabnext<CR>i
+
+"za is to toggle current fold open/close"
+"nnoremap <Space> za
+
+"set foldmethod=syntax
+"set foldlevelstart=1
+
+"fold javascript
+"let javaScript_fold=1
+
+autocmd BufRead,BufNewFile *.txt setlocal spell
+autocmd FileType markdown setlocal spell
+
+"hi clear SpellBad
+"hi SpellBad cterm=undercurl,bold ctermfg=red
+
+"fold xml
+"let xml_syntax_folding=1
+
+
+" COC VIM CONFIGURATION
+" " TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+    " Recently vim can merge signcolumn and number column into one
+    set signcolumn=number
+else
+    set signcolumn=yes
+endif
+"
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+    inoremap <silent><expr> <c-space> coc#refresh()
+else
+    inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+" Original configuraiton is g* gd, gy, gi, gr
+nmap <silent> cd <Plug>(coc-definition)
+nmap <silent> cy <Plug>(coc-type-definition)
+nmap <silent> ci <Plug>(coc-implementation)
+nmap <silent> cr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+"nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+        call CocActionAsync('doHover')
+    else
+        execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
+endfunction
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder.
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+    nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+    nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+    inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+    vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+    vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+" nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <space>t  :Tags<cr>
+nnoremap <silent><nowait> <space>m  :Marks<cr>
+nnoremap <silent><nowait> <space>mm  :Maps<cr>
+nnoremap <silent><nowait> <space>b :Buffers<cr>
+nnoremap <silent><nowait> <space>f :Files<cr>
+nnoremap <silent><nowait> <space>s :Rg<cr>
+"
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" END OF COC VIM CONFIGURATION
+"
+"
+" COC SNIPPET
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? coc#_select_confirm() :
+            \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+" END OF COC SNIPPET
+" 
+" ALE for javascript
+"
+let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
+let g:ale_linters = {'jsx': ['stylelint', 'eslint']}
+let g:ale_fixers = {
+            \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \   'javascript': ['prettier', 'eslint'],
+            \}
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+"Go to next problem
+nmap <silent> <space>/ :ALENext<cr> 
+"End of ALE
+"
+"
+"Save 
+
+nnoremap <C-Z> :update<cr>
+" nnoremap zz :update<cr>
+inoremap <C-Z> <esc>:update<cr>gi<esc>
+
+"End of save
+"
+
+"Jump out of parenthese
+inoremap <C-e> <C-o>A
+
+
+augroup autoformat_settings
+    autocmd FileType bzl AutoFormatBuffer buildifier
+    autocmd FileType c,cpp,proto,arduino AutoFormatBuffer clang-format
+    autocmd FileType go AutoFormatBuffer gofmt
+    autocmd FileType gn AutoFormatBuffer gn
+    autocmd FileType javascript,html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+    autocmd FileType java AutoFormatBuffer google-java-format
+    " autocmd FileType python AutoFormatBuffer yapf
+    autocmd FileType python AutoFormatBuffer autopep8
+    "autocmd FileType rust AutoFormatBuffer rustfmt
+    "autocmd FileType vue AutoFormatBuffer prettier
+augroup END
+
+"fzf start
+
+nnoremap <C-p> :Files<CR>
+nnoremap <C-e> :Buffers<CR>
+nnoremap <silent> <Leader>s :Rg<CR>
+nnoremap <silent> <Leader>f :Files<CR>
+nnoremap <silent> <Leader>b :Buffers<CR>
+nnoremap <silent> <Leader>m :Maps<CR>
+
+let g:fzf_action = { 'ctrl-e': 'edit' }
+
+" This is the default extra key bindings
+let g:fzf_action = {
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-v': 'vsplit' } 
+
+" - Popup window (center of the screen)
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
+" Customize fzf colors to match your color scheme
+" - fzf#wrap translates this to a set of `--color` options
+let g:fzf_colors =
+            \ { 'fg':      ['fg', 'Normal'],
+            \ 'bg':      ['bg', 'Normal'],
+            \ 'hl':      ['fg', 'Comment'],
+            \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+            \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+            \ 'hl+':     ['fg', 'Statement'],
+            \ 'info':    ['fg', 'PreProc'],
+            \ 'border':  ['fg', 'Ignore'],
+            \ 'prompt':  ['fg', 'Conditional'],
+            \ 'pointer': ['fg', 'Exception'],
+            \ 'marker':  ['fg', 'Keyword'],
+            \ 'spinner': ['fg', 'Label'],
+            \ 'header':  ['fg', 'Comment'] }
+
+"fzf end
+"
+"
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filename', 'modified', 'method' ] ]
+      \ },
+      \ 'component_function': {
+      \   'method': 'NearestMethodOrFunction'
+      \ },
+      \ }
+
+
+autocmd FileType javascript let b:coc_root_patterns = ['.git', '.env']
+
+
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+
+nnoremap <leader>nv :vsplit $MYVIMRC<C-R>
+
+inoremap jk <esc>
+
+"Vimscript file settign ---{{{
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+"}}}
+"
+nnoremap <leader>gc :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
+
+nnoremap <leader>N :setlocal number!<cr>
+
+" au BufReadCmd   *.epub      call zip#Browse(expand("<amatch>"))
+
+let g:python_highlight_all = 1
+
+" .............................................................................
+" junegunn/limelight.vim
+" .............................................................................
+
+let g:limelight_conceal_ctermfg=244
+
+" .............................................................................
+" iamcco/markdown-preview.nvim
+" .............................................................................
+
+"START configuration of markdown preivew
+"let g:mkdp_path_to_chrome = ""
+" Path to the chrome or the command to open chrome (or other modern browsers).
+" If set, g:mkdp_browserfunc would be ignored.
+
+let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
+" Callback Vim function to open browser, the only parameter is the url to open.
+
+let g:mkdp_auto_start = 0
+" Set to 1, Vim will open the preview window on entering the Markdown
+" buffer.
+
+let g:mkdp_auto_open = 0
+" Set to 1, Vim will automatically open the preview window when you edit a
+" Markdown file.
+
+let g:mkdp_auto_close = 0
+" Set to 1, Vim will automatically close the current preview window when
+" switching from one Markdown buffer to another.
+
+let g:mkdp_refresh_slow = 1
+" Set to 1, Vim will just refresh Markdown when saving the buffer or
+" leaving from insert mode. With default 0, it will automatically refresh
+" Markdown as you edit or move the cursor.
+
+let g:mkdp_command_for_global = 0
+" Set to 1, the MarkdownPreview command can be used for all files,
+" by default it can only be used in Markdown files.
+
+let g:mkdp_open_to_the_world = 0
+" Set to 1, the preview server will be available to others in your network.
+" By default, the server only listens on localhost (127.0.0.1).
+let g:mkdp_markdown_css=fnameescape($HOME).'/.local/lib/github-markdown-css/github-markdown.css'
+"END of configure markdown preview
+"
+"
+"start tmux vim navigator
+" Smart pane switching with awareness of Vim splits.
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+" nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+"end tmux vim navigator
